@@ -1,0 +1,16 @@
+.List {
+    border: 1px solid #d9dddd;
+    border-radius: 15px;
+}
+
+.Highlight {
+    background: yellow;
+}
+
+.PatientIndicator {
+    cursor: pointer;
+    border: none;
+    &:hover {
+        background: #b5b5b5;
+    }
+}

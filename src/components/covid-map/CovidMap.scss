@@ -1,0 +1,39 @@
+.Container {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+}
+
+.MapView {
+    flex: 6;
+    margin-right: 10px;
+}
+
+.DashBoard {
+    flex: 2;
+    border: 2px solid red;
+    padding: 0 10px;
+    border-radius: 15px;
+}
+
+.PatientInfo {
+    margin-bottom: 20px;
+}
+
+.HighLight {
+    background: #B5b5b5;
+}
+
+.DashBoard-Title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
