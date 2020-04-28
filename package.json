@@ -1,5 +1,5 @@
 {
-  "homepage": "https://quangkhaidam93.github.io/covid19-map",
+  "homepage": "https://quangkhaidam93.github.io/1653033-covid19-map",
   "name": "covid-map-1653033",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "fetch-mock": "^9.4.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

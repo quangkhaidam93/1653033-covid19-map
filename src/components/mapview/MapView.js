@@ -1,7 +1,8 @@
 import React from 'react';
-import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
+import {GoogleMap, LoadScript, Marker, InfoBox} from '@react-google-maps/api';
+import './MapView.scss';
 
-const mapView = (props) => {
+const MapView = (props) => {
     return (
         <LoadScript
             id="script-loader"
@@ -14,15 +15,42 @@ const mapView = (props) => {
                 zoom={props.center.isDefault ? 6 : 12}
             >
                 {
-                    props.patients.map((patient, index) => <Marker
-                            key={index}
-                            position={{lat: patient.lat, lng: patient.lng}}
-                            onClick={() => props.onClickMarker(patient)}
-                        > </Marker>) 
+                    props.patients.map((patient, index) => {
+                        if (patient === props.selectedPatient) {
+                            return (
+                                <div key={index}>
+                                    <Marker
+                                        position={{lat: patient.lat, lng: patient.lng}}
+                                        onClick={() => props.onClickMarker(patient)}
+                                    />
+                                    <div>
+                                        <InfoBox
+                                            position={{lat: patient.lat, lng: patient.lng}}
+                                        >   
+                                            <div>
+                                                <p>{patient.name}</p>
+                                                <p>{patient.address}</p>
+                                            </div>   
+                                        </InfoBox>
+                                    </div>
+                                </div> 
+                            );
+                        }
+                        else {
+                            return (
+                                <div key={index}>
+                                    <Marker
+                                        position={{lat: patient.lat, lng: patient.lng}}
+                                        onClick={() => props.onClickMarker(patient)}
+                                    />
+                                </div>
+                            )
+                        }
+                    })
                 }
             </GoogleMap>
         </LoadScript>
     )
 }
 
-export default mapView;
+export default MapView;
