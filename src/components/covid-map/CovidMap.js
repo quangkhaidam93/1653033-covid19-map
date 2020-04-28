@@ -9,12 +9,17 @@ const CovidMap = () => {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [centerPos, setCenterPos] = useState({lat: 10.762693, lng: 106.682731, isDefault: true });
+    const [patientSlider, setPatientSlider] = useState([]);
+
+    const initialDate = "2019-12-08T00:00:00";
 
     useEffect(() => {
         fetch("https://maps.vnpost.vn/apps/covid19/api/patientapi/list")
             .then(res => res.json())
             .then(res => {
-                const sortedPatients = res.data.sort((a, b) => {
+                setPatients(res.data);
+                const patientSlider = res.data.filter(patient => patient.verifyDate <= initialDate);
+                const sortedPatientSlider  = patientSlider.sort((a, b) => {
                     if (new Date(a.verifyDate) > new Date(b.verifyDate)) {
                         return -1;
                     }
@@ -24,14 +29,14 @@ const CovidMap = () => {
                     else {
                         return 0;
                     }
-                })
-                const patients = sortedPatients.map((patient, index) => {
+                });
+                const newPatients = sortedPatientSlider.map((patient, index) => {
                     return {
                         ...patient,
                         index: index
                     }
-                })
-                setPatients(patients);
+                });
+                setPatientSlider(newPatients);
             })
     }, []);
 
@@ -44,15 +49,38 @@ const CovidMap = () => {
         setSelectedPatient(patient);
         setCenterPos({lat: patient.lat, lng: patient.lng, isDefault: false});
     }
+
+    const handleSlider = (checkDate) => {
+        const patientSlider = patients.filter(patient => patient.verifyDate <= checkDate);
+        const sortedPatientSlider  = patientSlider.sort((a, b) => {
+            if (new Date(a.verifyDate) > new Date(b.verifyDate)) {
+                return -1;
+            }
+            else if (new Date(a.verifyDate) < new Date(b.verifyDate)) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+        const newPatients = sortedPatientSlider.map((patient, index) => {
+            return {
+                ...patient,
+                index: index
+            }
+        });
+        setPatientSlider(newPatients);
+    }
     
     return (
         <div>
             <div className="Container">
                 <section className="MapView">
                     <MapView 
-                        patients={patients}
+                        patients={patientSlider}
                         onClickMarker={handleMarkerClicked}
-                        center={centerPos} 
+                        center={centerPos}
+                        selectedPatient={selectedPatient}
                     />
                 </section>
                 <section className="DashBoard">
@@ -64,7 +92,7 @@ const CovidMap = () => {
                     <div>
                         <div className="title">List View</div>
                         <ListView 
-                            patients={patients} 
+                            patients={patientSlider}
                             itemIndex={selectedPatient ? selectedPatient.index : null}
                             onClickPatient={handlePatientClicked}
                         />
@@ -73,7 +101,9 @@ const CovidMap = () => {
             </div>
             <div className="Container">
                 <section className="SliderBar">
-                    <SliderBar />
+                    <SliderBar 
+                        handleSlider={handleSlider}
+                    />
                 </section>
             </div>
         </div>

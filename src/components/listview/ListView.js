@@ -10,7 +10,6 @@ const ListView = props => {
     const Row = memo(props => {
         const {data, index, style} = props;
         const className = data.itemIndex === index ? 'PatienIndicator Highlight' : 'PatientIndicator'; 
-    
         return (<button
             key={index} 
             className={className}
@@ -34,7 +33,7 @@ const ListView = props => {
     return (
         <FixedList
             className="List"
-            height={390}
+            height={300}
             itemCount={patientsLength}
             itemSize={50}
             width={"100%"}
