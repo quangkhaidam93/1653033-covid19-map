@@ -1,13 +1,12 @@
-import React, {createRef, useEffect, memo} from 'react';
+import React, {useRef, memo, useEffect} from 'react';
 import { FixedSizeList as FixedList, areEqual } from 'react-window';
 import './ListView.scss';
 
-
-
 const ListView = props => {
-    const listRef = createRef();
+    const listRef = useRef();
 
     const Row = memo(props => {
+        console.log("Row rendering...");
         const {data, index, style} = props;
         const className = data.itemIndex === index ? 'PatienIndicator Highlight' : 'PatientIndicator'; 
         return (<button
@@ -24,11 +23,13 @@ const ListView = props => {
 
     const data = Object.assign({}, {patients: props.patients}, {onClickPatient: props.onClickPatient}, {itemIndex: props.itemIndex});
     
+    console.log('List View rendering...');
+
     useEffect(() => {
-        if (data.itemIndex) {
-            listRef.current.scrollToItem(props.itemIndex, "smarter");
+        if (props.itemIndex) {
+            listRef.current.scrollToItem(props.itemIndex, 'smarter');
         }
-    });
+    })
 
     return (
         <FixedList

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 import './PatientInfo.scss';
 
 const PatientInfo = (props) => {
     const date = props.patient ? props.patient.verifyDate.substring(0, 10) : "";
 
+    console.log('Patient Info rendering...');
     return (
         <div>
             <div><span>Name: </span>{props.patient ? props.patient.name : ""}</div>
@@ -15,4 +16,4 @@ const PatientInfo = (props) => {
     )
 }
 
-export default PatientInfo;
+export default memo(PatientInfo);
