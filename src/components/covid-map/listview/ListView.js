@@ -15,7 +15,7 @@ const ListView = props => {
             onClick={() => data.onClickPatient(data.patients[index])}
             style={style}     
         >
-                {data.patients[index].name}
+            {data.patients[index].name}
         </button>)
     }, areEqual);
     

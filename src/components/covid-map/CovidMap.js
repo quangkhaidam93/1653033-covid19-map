@@ -80,9 +80,6 @@ const CovidMap = () => {
     }
     
     console.log('Covid Map rendering...');
-    console.log(patients);
-    console.log(selectedPatient);
-    console.log(centerPos);
 
     return (
         <div>
