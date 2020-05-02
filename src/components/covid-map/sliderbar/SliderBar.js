@@ -3,7 +3,7 @@ import Slider from '@material-ui/core/Slider';
 import moment from 'moment';
 import './SliderBar.scss';
 
-const SliderBar = (props) => {
+const SliderBar = ({handleSlider}) => {
     const [value, setValue] = useState(0);
     const [playable, setPlayable] = useState(false);
     const [speed, setSpeed] = useState(1000);
@@ -11,9 +11,9 @@ const SliderBar = (props) => {
 
     const increaseValue = useCallback(() => {
         const chosenDate = moment(initialDate).add(value, 'days').format('YYYY-MM-DDT00:00:00');
-        props.handleSlider(chosenDate);
+        handleSlider(chosenDate);
         setValue(value + 1);
-    }, [value, props]);
+    }, [value, handleSlider]);
 
     const today = moment(new Date()).format('YYYY-MM-DDT00:00:00');
     const initialDate = "2019-12-08T00:00:00";
@@ -58,8 +58,10 @@ const SliderBar = (props) => {
 
     const handleChange = (event, newValue) => {
         const chosenDate = moment(initialDate).add(value, 'days').format('YYYY-MM-DDT00:00:00');
-        props.handleSlider(chosenDate);
-        setPlayable(false);
+        handleSlider(chosenDate);
+        if (playable ===  true) {
+            setPlayable(false);
+        }
         setValue(newValue);
     }
 
@@ -70,6 +72,7 @@ const SliderBar = (props) => {
 
     const buttonClass = playable ? 'PlayButton pause' : 'PlayButton';
 
+    console.log("SliderBar rendering...");
     return (
         <div>
             <div className="SliderSection">

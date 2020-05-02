@@ -8,13 +8,10 @@ import SliderBar from './sliderbar/SliderBar';
 const CovidMap = () => {
     const [patients, setPatients] = useState({patientsData: [], patientSlider: []});
     const [selectedPatient, setSelectedPatient] = useState(null);
-    const [centerPos, setCenterPos] = useState({lat: 10.762693, lng: 106.682731, isDefault: true });
-    // const [patientSlider, setPatientSlider] = useState([]);
 
     const initialDate = "2019-12-08T00:00:00";
 
     useEffect(() => {
-        console.log("Covid Map: useEffect is running...");
         fetch("https://maps.vnpost.vn/apps/covid19/api/patientapi/list")
             .then(res => res.json())
             .then(res => {
@@ -43,12 +40,10 @@ const CovidMap = () => {
 
     const handleMarkerClicked = (patient) => {
         setSelectedPatient(patient);
-        setCenterPos({lat: patient.lat, lng: patient.lng, isDefault: false});
     }
 
     const handlePatientClicked = (patient) => {
         setSelectedPatient(patient);
-        setCenterPos({lat: patient.lat, lng: patient.lng, isDefault: false});
     }
 
     const handleSlider = (checkDate) => {
@@ -78,8 +73,6 @@ const CovidMap = () => {
             return;
         }
     }
-    
-    console.log('Covid Map rendering...');
 
     return (
         <div>
@@ -88,7 +81,6 @@ const CovidMap = () => {
                     <MapView 
                         patients={patients.patientSlider}
                         onClickMarker={handleMarkerClicked}
-                        center={centerPos}
                         selectedPatient={selectedPatient}
                     />
                 </section>
