@@ -1,10 +1,10 @@
 import React from 'react';
-import {GoogleMap, LoadScript, Marker, InfoBox} from '@react-google-maps/api';
+import {GoogleMap, LoadScriptNext, Marker, InfoBox} from '@react-google-maps/api';
 import './MapView.scss';
 
 const MapView = ({patients, onClickMarker, selectedPatient}) => {
     return (
-        <LoadScript
+        <LoadScriptNext
             id="script-loader"
             googleMapsApiKey="AIzaSyBCZ5at1ctI-CxNBOt5xiWrktPaWAWXD8s"
         >
@@ -50,7 +50,7 @@ const MapView = ({patients, onClickMarker, selectedPatient}) => {
                     })
                 }
             </GoogleMap>
-        </LoadScript>
+        </LoadScriptNext>
     )
 }
 

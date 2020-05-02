@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback, useRef} from 'react';
+import React, {useState, useEffect, useCallback, useRef, Fragment} from 'react';
 import Slider from '@material-ui/core/Slider';
 import moment from 'moment';
 import './SliderBar.scss';
@@ -74,7 +74,7 @@ const SliderBar = ({handleSlider}) => {
 
     console.log("SliderBar rendering...");
     return (
-        <div>
+        <Fragment>
             <div className="SliderSection">
                 <div className="ButtonArea">
                     <button className={buttonClass} onClick={autoPlay}></button>
@@ -113,7 +113,7 @@ const SliderBar = ({handleSlider}) => {
                     <button onClick={handleOk}>OK</button>
                 </div>
             </div> 
-        </div>
+        </Fragment>
     )
 };
 

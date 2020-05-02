@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, Fragment } from 'react';
 import MapView from './mapview/MapView';
 import './CovidMap.scss';
 import ListView from './listview/ListView';
@@ -34,8 +34,10 @@ const CovidMap = () => {
                     }
                 });
                 setPatients({patientsData: res.data, patientSlider: newPatients});
-                // setPatientSlider(newPatients);
-            })
+            });
+            // return () => {
+
+            // }
     }, []);
 
     const handleMarkerClicked = (patient) => {
@@ -66,7 +68,6 @@ const CovidMap = () => {
                     index: index
                 }
             });
-            // setPatientSlider(newPatients);
             setPatients({...patients, patientSlider: newPatients});
         }
         else {
@@ -75,7 +76,7 @@ const CovidMap = () => {
     }
 
     return (
-        <div>
+        <Fragment>
             <div className="Container">
                 <section className="MapView">
                     <MapView 
@@ -107,7 +108,7 @@ const CovidMap = () => {
                     />
                 </section>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
