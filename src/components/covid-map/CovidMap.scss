@@ -40,3 +40,19 @@
 .SliderBar {
     margin-top: 40px;
 }
+
+.Navigation {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto;
+    width: 90vw;
+}
+
+.Link {
+    flex: 1;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: inherit;
+}

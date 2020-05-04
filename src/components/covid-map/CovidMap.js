@@ -4,6 +4,8 @@ import './CovidMap.scss';
 import ListView from './listview/ListView';
 import PatientInfo from './patient_info/PatientInfo';
 import SliderBar from './sliderbar/SliderBar';
+import LinkContainer from '../LinkContainer/LinkContainer';
+import {Link} from 'react-router-dom';
 
 const CovidMap = () => {
     const [patients, setPatients] = useState({patientsData: [], patientSlider: []});
@@ -77,6 +79,14 @@ const CovidMap = () => {
 
     return (
         <Fragment>
+            <section className="Navigation">
+                <Link to="/" className="Link">
+                    <LinkContainer active={true}>Covid19 Map</LinkContainer>
+                </Link>
+                <Link to="/stats" className="Link">
+                    <LinkContainer active={false}>Covid19 Stats</LinkContainer>
+                </Link>
+            </section>
             <div className="Container">
                 <section className="MapView">
                     <MapView 

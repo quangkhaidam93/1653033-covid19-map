@@ -14,25 +14,15 @@ const App = (props) => {
 
   return (
     <Router>
-      <section className="Navigation">
-        <Link to="/" onClick={handleActive} className="Link">
-          <LinkContainer active={activeLinks.link1}>Covid19 Map</LinkContainer>
-        </Link>
-        <Link to="/stats" onClick={handleActive} className="Link">
-          <LinkContainer active={activeLinks.link2}>Covid19 Stats</LinkContainer>
-        </Link>
-      </section>
-
-      <section className="Content">
-        <Switch>
-          <Route path='/stats'>
-            <CovidStats />
-          </Route>
-          <Route path='/'>
-            <CovidMap />
-          </Route>
-        </Switch>
-      </section>
+      <Switch>
+        <Route exact path='/stats'>
+          <CovidStats />
+        </Route>
+        <Route exact path='/'>
+          <CovidMap />
+        </Route>
+        <Route><div>Page Not Found</div></Route>
+      </Switch>
     </Router>  
   );
 }
