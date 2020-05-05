@@ -13,9 +13,10 @@ const CovidMap = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
 
     const initialDate = "2019-12-08T00:00:00";
+    const url = "https://cors-anywhere.herokuapp.com/maps.vnpost.vn/apps/covid19/api/patientapi/list"
 
     useEffect(() => {
-        axios.get("https://cors-anywhere.herokuapp.com/maps.vnpost.vn/apps/covid19/api/patientapi/list")
+        axios.get(url)
             .then(res => {
                 const patientSlider = res.data.data.filter(patient => patient.verifyDate <= initialDate);
                 const sortedPatientSlider  = patientSlider.sort((a, b) => {

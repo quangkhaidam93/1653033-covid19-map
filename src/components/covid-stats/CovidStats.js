@@ -8,16 +8,18 @@ import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'rec
 const CovidStats = () => {
     const [worldData, setWorldData] = useState(null);
     const [vnData, setVNData] = useState(null);
+    const worldUrl = 'https://td.fpt.ai/corona/corona-total.json';
+    const vnUrl = 'https://td.fpt.ai/corona/corona-chart-vn.json';
 
     useEffect(() => {
-        axios.get('https://td.fpt.ai/corona/corona-total.json')
+        axios.get(worldUrl)
             .then(res => {
                 const worldData = Object.keys(res.data).map(key => {
                     return {date: key, infected: res.data[key][0], dead: res.data[key][1], cured: res.data[key][2]}
                 });
                 setWorldData(worldData);
             });
-        axios.get('https://td.fpt.ai/corona/corona-chart-vn.json')
+        axios.get(vnUrl)
             .then(res => {
                 const vnData = Object.keys(res.data).map(key => {
                     return {date: key, infected: res.data[key][0], suspected: res.data[key][1], cured: res.data[key][2]}

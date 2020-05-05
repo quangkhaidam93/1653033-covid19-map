@@ -3,10 +3,12 @@ import {GoogleMap, LoadScriptNext, Marker, InfoBox} from '@react-google-maps/api
 import './MapView.scss';
 
 const MapView = ({patients, onClickMarker, selectedPatient}) => {
+    const apiKey = "AIzaSyBCZ5at1ctI-CxNBOt5xiWrktPaWAWXD8s";
+    
     return (
         <LoadScriptNext
             id="script-loader"
-            googleMapsApiKey="AIzaSyBCZ5at1ctI-CxNBOt5xiWrktPaWAWXD8s"
+            googleMapsApiKey= {apiKey}
         >
             <GoogleMap
                 id="GoogleMap"
