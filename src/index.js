@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-require('./mocks');
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <App />,
-  // </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

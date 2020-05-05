@@ -27,6 +27,7 @@ const CovidStats = () => {
     }, []);
 
     return (
+        worldData === null || vnData === null ? <div className="Loading">Loading...</div> :
         <Fragment>
             <section className="Navigation">
                 <Link to="/" className="Link">
@@ -38,25 +39,7 @@ const CovidStats = () => {
             </section>
             <div className="Container">
                 <section className="Chart">
-                    <div className="Title">Số ca mắc, chết và chữa khỏi của thế giới theo thời gian</div>
-                    <LineChart
-                        width={600}
-                        height={500}
-                        data={worldData}
-                        margin={{top: 5, right: 30, left: 20, bottom: 5,}}
-                    >
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip payload={[{ name: '05-01', value: 12, unit: 'kg' }]} />
-                        <Legend iconType='plainline' />
-                        <Line type="monotone" dataKey="infected" stroke="#8884d8" />
-                        <Line type="monotone" dataKey="dead" stroke="#ff0000" />
-                        <Line type="monotone" dataKey="cured" stroke="#82ca9d" />
-                    </LineChart>
-                </section>
-                <section className="Chart">
-                    <div className="Title">Số ca mắc, nghi nhiễm và chữa khỏi ở Việt Nam theo thời gian</div>
+                    <div className="Title">COVID19 Statistics of Viet Nam from Dec 08 2019 to now</div>
                     <LineChart
                             width={600}
                             height={500}
@@ -72,6 +55,24 @@ const CovidStats = () => {
                             <Line type="monotone" dataKey="suspected" stroke="#ff0000" />
                             <Line type="monotone" dataKey="cured" stroke="#82ca9d" />
                         </LineChart>
+                </section>
+                <section className="Chart">
+                    <div className="Title">COVID19 Statistics of World from Dec 08 2019 to now</div>
+                    <LineChart
+                        width={600}
+                        height={500}
+                        data={worldData}
+                        margin={{top: 5, right: 30, left: 20, bottom: 5,}}
+                    >
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip payload={[{ name: '05-01', value: 12, unit: 'kg' }]} />
+                        <Legend />
+                        <Line type="monotone" dataKey="infected" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="dead" stroke="#ff0000" />
+                        <Line type="monotone" dataKey="cured" stroke="#82ca9d" />
+                    </LineChart>
                 </section>
             </div>
         </Fragment>

@@ -6,6 +6,7 @@ import PatientInfo from './patient_info/PatientInfo';
 import SliderBar from './sliderbar/SliderBar';
 import LinkContainer from '../LinkContainer/LinkContainer';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 const CovidMap = () => {
     const [patients, setPatients] = useState({patientsData: [], patientSlider: []});
@@ -14,10 +15,9 @@ const CovidMap = () => {
     const initialDate = "2019-12-08T00:00:00";
 
     useEffect(() => {
-        fetch("https://maps.vnpost.vn/apps/covid19/api/patientapi/list")
-            .then(res => res.json())
+        axios.get("https://cors-anywhere.herokuapp.com/maps.vnpost.vn/apps/covid19/api/patientapi/list")
             .then(res => {
-                const patientSlider = res.data.filter(patient => patient.verifyDate <= initialDate);
+                const patientSlider = res.data.data.filter(patient => patient.verifyDate <= initialDate);
                 const sortedPatientSlider  = patientSlider.sort((a, b) => {
                     if (new Date(a.verifyDate) > new Date(b.verifyDate)) {
                         return -1;
@@ -35,11 +35,8 @@ const CovidMap = () => {
                         index: index
                     }
                 });
-                setPatients({patientsData: res.data, patientSlider: newPatients});
+                setPatients({patientsData: res.data.data, patientSlider: newPatients});
             });
-            // return () => {
-
-            // }
     }, []);
 
     const handleMarkerClicked = (patient) => {
@@ -78,6 +75,7 @@ const CovidMap = () => {
     }
 
     return (
+        patients.patientsData.length === 0 ? <div className="Loading">Loading...</div> :
         <Fragment>
             <section className="Navigation">
                 <Link to="/" className="Link">
